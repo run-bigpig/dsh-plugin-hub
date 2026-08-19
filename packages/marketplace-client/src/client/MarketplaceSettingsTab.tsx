@@ -5,7 +5,7 @@ import type {
   MarketplaceOperation,
   MarketplacePlugin,
   MarketplaceSnapshot,
-} from '@deepseek-ai/dsh-desktop-marketplace-host/types'
+} from '@run-bigpig/dsh-desktop-marketplace-host/types'
 import css from './MarketplaceSettingsTab.module.css'
 
 export interface MarketplaceSettingsTabInjected {

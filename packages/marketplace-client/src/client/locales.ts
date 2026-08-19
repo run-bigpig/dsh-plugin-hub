@@ -45,3 +45,21 @@ export const en = {
   noPermissions: 'No additional permissions declared',
   operationFailed: 'The plugin operation failed.',
 } satisfies Record<MarketplaceLocaleKey, string>
+
+export const desktopZh = {
+  windowControls: '窗口控制',
+  minimize: '最小化',
+  maximize: '最大化',
+  restore: '还原',
+  close: '关闭',
+} satisfies Record<string, string>
+
+export type DesktopLocaleKey = keyof typeof desktopZh
+
+export const desktopEn = {
+  windowControls: 'Window controls',
+  minimize: 'Minimize',
+  maximize: 'Maximize',
+  restore: 'Restore',
+  close: 'Close',
+} satisfies Record<DesktopLocaleKey, string>

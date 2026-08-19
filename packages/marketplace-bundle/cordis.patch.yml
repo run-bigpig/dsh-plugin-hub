@@ -1,6 +1,6 @@
 - target: '@root'
   insert:
-    - id: desktop-marketplace-host
-      name: '@deepseek-ai/dsh-desktop-marketplace-host'
-    - id: desktop-marketplace-client
-      name: '@deepseek-ai/dsh-desktop-marketplace-client'
+    - id: desktop-integration-host
+      name: '@run-bigpig/dsh-desktop-marketplace-host'
+    - id: desktop-integration-client
+      name: '@run-bigpig/dsh-desktop-marketplace-client'

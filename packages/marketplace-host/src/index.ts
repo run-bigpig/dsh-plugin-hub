@@ -1,6 +1,12 @@
 import type { Context } from '@deepseek-ai/cordis'
 import { Remote, TypertRemoteService } from '@deepseek-ai/dsh-typert-protocol'
-import type { MarketplaceMutationRequest, MarketplaceOperation, MarketplaceSnapshot } from './types.ts'
+import type {
+  DesktopCapabilities,
+  DesktopWindowState,
+  MarketplaceMutationRequest,
+  MarketplaceOperation,
+  MarketplaceSnapshot,
+} from './types.ts'
 
 export type * from './types.ts'
 
@@ -9,7 +15,7 @@ const CONTROL_TOKEN = process.env.DSH_DESKTOP_CONTROL_TOKEN
 
 async function desktopRequest<T>(path: string, init?: RequestInit): Promise<T> {
   if (CONTROL_URL === undefined || CONTROL_TOKEN === undefined) {
-    throw new Error('DeepSeek Harness Desktop marketplace control bridge is unavailable')
+    throw new Error('DeepSeek Harness Desktop control bridge is unavailable')
   }
   const response = await fetch(new URL(path, CONTROL_URL), {
     ...init,
@@ -22,14 +28,39 @@ async function desktopRequest<T>(path: string, init?: RequestInit): Promise<T> {
   })
   if (!response.ok) {
     const message = await response.text()
-    throw new Error(`desktop marketplace request failed (${response.status}): ${message}`)
+    throw new Error(`desktop request failed (${response.status}): ${message}`)
   }
   return await response.json() as T
 }
 
-export class MarketplaceGateway extends TypertRemoteService {
+export class DesktopGateway extends TypertRemoteService {
   constructor(ctx: Context) {
-    super(ctx, 'marketplace')
+    super(ctx, 'desktop')
+  }
+
+  @Remote('capabilities')
+  async capabilities(): Promise<DesktopCapabilities> {
+    return await desktopRequest('/v1/desktop/capabilities')
+  }
+
+  @Remote('windowState')
+  async windowState(): Promise<DesktopWindowState> {
+    return await desktopRequest('/v1/window/state')
+  }
+
+  @Remote('minimizeWindow')
+  async minimizeWindow(): Promise<void> {
+    await desktopRequest('/v1/window/minimize', { method: 'POST' })
+  }
+
+  @Remote('toggleMaximizeWindow')
+  async toggleMaximizeWindow(): Promise<DesktopWindowState> {
+    return await desktopRequest('/v1/window/toggle-maximize', { method: 'POST' })
+  }
+
+  @Remote('closeWindow')
+  async closeWindow(): Promise<void> {
+    await desktopRequest('/v1/window/close', { method: 'POST' })
   }
 
   @Remote('catalog')
@@ -51,4 +82,4 @@ export class MarketplaceGateway extends TypertRemoteService {
   }
 }
 
-export default MarketplaceGateway
+export default DesktopGateway

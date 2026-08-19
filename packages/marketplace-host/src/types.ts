@@ -48,3 +48,13 @@ export interface MarketplaceMutationRequest {
   pluginId: string
   action: MarketplaceOperationAction
 }
+
+export interface DesktopCapabilities {
+  apiVersion: number
+  capabilities: string[]
+}
+
+export interface DesktopWindowState {
+  maximized: boolean
+  fullscreen: boolean
+}

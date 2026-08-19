@@ -30,23 +30,14 @@ if (!await exists(resolve(harness, 'packages/client/tsdown.client.ts'))) {
   throw new Error(`${harness} is not a DeepSeek Harness source checkout`)
 }
 const seed = JSON.parse(await readFile(resolve(harness, 'package.json'), 'utf8'))
-process.stdout.write(`building Marketplace against Harness ${seed.version}\n`)
+process.stdout.write(`building Desktop integration against Harness ${seed.version}\n`)
 const overlay = resolve(harness, 'packages/desktop')
 await rm(overlay, { recursive: true, force: true })
-await mkdir(overlay, { recursive: true })
-for (const name of ['marketplace-host', 'marketplace-client', 'marketplace-bundle']) {
-  await cp(resolve(project, 'packages', name), resolve(overlay, name), { recursive: true })
-}
 await mkdir(output, { recursive: true })
 
 const pnpm = process.platform === 'win32' ? 'pnpm.exe' : 'pnpm'
 await run(pnpm, [
   'install', '--frozen-lockfile=false', '--ignore-scripts',
-  '--filter', '.',
-  '--filter', '@deepseek-ai/dsh-typert-generator',
-  '--filter', '@deepseek-ai/dsh-desktop-marketplace-host',
-  '--filter', '@deepseek-ai/dsh-desktop-marketplace-client',
-  '--filter', '@deepseek-ai/dsh-desktop-marketplace',
   '--store-dir', store,
   '--fetch-retries', '5', '--fetch-retry-mintimeout', '10000',
   '--fetch-retry-maxtimeout', '120000', '--fetch-timeout', '300000',
@@ -55,6 +46,18 @@ await run(pnpm, [
 const harnessRequire = createRequire(resolve(harness, 'package.json'))
 const tsc = harnessRequire.resolve('typescript/bin/tsc')
 const tsdown = harnessRequire.resolve('tsdown/run')
+await run(pnpm, ['run', 'build:lib:host'], harness)
+await mkdir(overlay, { recursive: true })
+for (const name of ['marketplace-host', 'marketplace-client', 'marketplace-bundle']) {
+  await cp(resolve(project, 'packages', name), resolve(overlay, name), { recursive: true })
+}
+await run(pnpm, [
+  'install', '--frozen-lockfile=false', '--ignore-scripts',
+  '--filter', '@run-bigpig/dsh-desktop-marketplace-host',
+  '--filter', '@run-bigpig/dsh-desktop-marketplace-client',
+  '--filter', '@run-bigpig/dsh-desktop-marketplace',
+  '--store-dir', store, '--offline',
+], harness)
 await run(process.execPath, [tsc, '-b', 'packages/desktop/marketplace-host'], harness)
 const generatorURL = pathToFileURL(resolve(harness, 'packages/typert/generator/lib/types/workspace.js')).href
 const { WorkspaceTypertGenerator } = await import(generatorURL)
@@ -69,7 +72,7 @@ await writeFile(hostAggregatePath, hostAggregate.replace(
 let artifacts
 try {
   artifacts = new WorkspaceTypertGenerator(harness).generate(
-    ['@deepseek-ai/dsh-desktop-marketplace-host'],
+    ['@run-bigpig/dsh-desktop-marketplace-host'],
     ['host'],
   )
 } finally {
@@ -93,9 +96,9 @@ await run(process.execPath, [
 ], harness)
 
 for (const name of [
-  '@deepseek-ai/dsh-desktop-marketplace-host',
-  '@deepseek-ai/dsh-desktop-marketplace-client',
-  '@deepseek-ai/dsh-desktop-marketplace',
+  '@run-bigpig/dsh-desktop-marketplace-host',
+  '@run-bigpig/dsh-desktop-marketplace-client',
+  '@run-bigpig/dsh-desktop-marketplace',
 ]) {
   const packageDir = name.endsWith('-host')
     ? resolve(overlay, 'marketplace-host')
@@ -104,4 +107,4 @@ for (const name of [
       : resolve(overlay, 'marketplace-bundle')
   await run(pnpm, ['pack', '--pack-destination', output], packageDir)
 }
-process.stdout.write(`Marketplace artifacts written to ${basename(output)}\n`)
+process.stdout.write(`Desktop integration artifacts written to ${basename(output)}\n`)
