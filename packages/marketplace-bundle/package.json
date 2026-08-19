@@ -1,0 +1,13 @@
+{
+  "name": "@deepseek-ai/dsh-desktop-marketplace",
+  "description": "Profile Bundle mounting the trusted DeepSeek Harness Desktop marketplace",
+  "version": "0.1.0",
+  "type": "module",
+  "license": "MIT",
+  "files": ["cordis.patch.yml"],
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } },
+  "peerDependencies": {
+    "@deepseek-ai/dsh-desktop-marketplace-host": "workspace:^",
+    "@deepseek-ai/dsh-desktop-marketplace-client": "workspace:^"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "deepseek.example-tools",
+  "name": "Example Tools",
+  "description": "Catalog fixture demonstrating the immutable GitHub Release contract. It is not published and cannot be installed.",
+  "publisher": "DeepSeek Harness Desktop",
+  "packageName": "@deepseek-ai-desktop/dsh-example-tools",
+  "repository": {
+    "id": 1,
+    "url": "https://github.com/run-bigpig/dsh-plugin-hub"
+  },
+  "release": {
+    "version": "0.1.0",
+    "assetUrl": "https://github.com/run-bigpig/dsh-plugin-hub/releases/download/v0.1.0/dsh-example-tools-0.1.0.tgz",
+    "sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "compatibility": {
+    "harnessCommits": [
+      "47f943859bef60e4160492346772ded9b24f765a"
+    ]
+  },
+  "permissions": [],
+  "license": "MIT",
+  "verified": false
+}

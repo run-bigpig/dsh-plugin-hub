@@ -1,0 +1,54 @@
+import type { Context } from '@deepseek-ai/cordis'
+import { Remote, TypertRemoteService } from '@deepseek-ai/dsh-typert-protocol'
+import type { MarketplaceMutationRequest, MarketplaceOperation, MarketplaceSnapshot } from './types.ts'
+
+export type * from './types.ts'
+
+const CONTROL_URL = process.env.DSH_DESKTOP_CONTROL_URL
+const CONTROL_TOKEN = process.env.DSH_DESKTOP_CONTROL_TOKEN
+
+async function desktopRequest<T>(path: string, init?: RequestInit): Promise<T> {
+  if (CONTROL_URL === undefined || CONTROL_TOKEN === undefined) {
+    throw new Error('DeepSeek Harness Desktop marketplace control bridge is unavailable')
+  }
+  const response = await fetch(new URL(path, CONTROL_URL), {
+    ...init,
+    headers: {
+      authorization: `Bearer ${CONTROL_TOKEN}`,
+      'content-type': 'application/json',
+      ...init?.headers,
+    },
+    signal: AbortSignal.timeout(30_000),
+  })
+  if (!response.ok) {
+    const message = await response.text()
+    throw new Error(`desktop marketplace request failed (${response.status}): ${message}`)
+  }
+  return await response.json() as T
+}
+
+export class MarketplaceGateway extends TypertRemoteService {
+  constructor(ctx: Context) {
+    super(ctx, 'marketplace')
+  }
+
+  @Remote('catalog')
+  async catalog(): Promise<MarketplaceSnapshot> {
+    return await desktopRequest('/v1/marketplace/catalog')
+  }
+
+  @Remote('mutate')
+  async mutate(request: MarketplaceMutationRequest): Promise<MarketplaceOperation> {
+    return await desktopRequest('/v1/marketplace/operations', {
+      method: 'POST',
+      body: JSON.stringify(request),
+    })
+  }
+
+  @Remote('operation')
+  async operation(id: string): Promise<MarketplaceOperation> {
+    return await desktopRequest(`/v1/marketplace/operations/${encodeURIComponent(id)}`)
+  }
+}
+
+export default MarketplaceGateway

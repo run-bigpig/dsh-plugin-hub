@@ -1,0 +1,16 @@
+{
+  "name": "@deepseek-ai-desktop/plugin-collection",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.7.0",
+  "scripts": {
+    "validate": "node scripts/validate-catalog.mjs",
+    "catalog": "node scripts/build-catalog.mjs",
+    "catalog:sign": "node scripts/sign-catalog.mjs",
+    "build:harness": "node scripts/build-against-harness.mjs"
+  },
+  "devDependencies": {
+    "ajv": "8.17.1"
+  }
+}
