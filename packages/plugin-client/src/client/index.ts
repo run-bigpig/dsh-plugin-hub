@@ -2,13 +2,13 @@ import type {} from '@deepseek-ai/dsh-client-locale/client'
 import type { ClientContext } from '@deepseek-ai/dsh-client-runtime/client'
 import type {} from '@deepseek-ai/dsh-client-ui-settings/client'
 import type {} from '@deepseek-ai/dsh-client-ui-layout/client'
-import desktopRemote from '@run-bigpig/dsh-desktop-marketplace-host/remote'
+import desktopRemote from '@run-bigpig/dsh-desktop-plugin-host/remote'
 import type {
   DesktopCapabilities,
   DesktopWindowState,
   MarketplaceOperation,
   MarketplaceSnapshot,
-} from '@run-bigpig/dsh-desktop-marketplace-host/types'
+} from '@run-bigpig/dsh-desktop-plugin-host/types'
 import {
   MarketplaceSettingsTab,
   type MarketplaceSettingsTabInjected,

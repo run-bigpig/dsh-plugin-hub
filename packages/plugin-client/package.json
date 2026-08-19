@@ -1,6 +1,6 @@
 {
-  "name": "@run-bigpig/dsh-desktop-marketplace-client",
-  "description": "DeepSeek Harness Desktop integration UI and plugin marketplace",
+  "name": "@run-bigpig/dsh-desktop-plugin-client",
+  "description": "DSH-DeskTop integration UI and plugin marketplace",
   "version": "0.1.9",
   "type": "module",
   "main": "lib/index.js",
@@ -33,7 +33,7 @@
     "@deepseek-ai/dsh-client-ui-layout": "workspace:^",
     "@deepseek-ai/dsh-client-ui-slots": "workspace:^",
     "@deepseek-ai/dsh-invariants": "workspace:^",
-    "@run-bigpig/dsh-desktop-marketplace-host": "workspace:^",
+    "@run-bigpig/dsh-desktop-plugin-host": "workspace:^",
     "react": "^18.2.0"
   },
   "devDependencies": {
@@ -45,7 +45,7 @@
     "@deepseek-ai/dsh-client-ui-layout": "workspace:^",
     "@deepseek-ai/dsh-client-ui-slots": "workspace:^",
     "@deepseek-ai/dsh-invariants": "workspace:^",
-    "@run-bigpig/dsh-desktop-marketplace-host": "workspace:^",
+    "@run-bigpig/dsh-desktop-plugin-host": "workspace:^",
     "@types/react": "~18.3.1",
     "react": "^18.2.0"
   }

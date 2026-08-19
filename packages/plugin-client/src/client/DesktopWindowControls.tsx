@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
 import type { PropsLocale, PropsRuntime } from '@deepseek-ai/dsh-client-ui-slots'
-import type { DesktopWindowState } from '@run-bigpig/dsh-desktop-marketplace-host/types'
+import type { DesktopWindowState } from '@run-bigpig/dsh-desktop-plugin-host/types'
 import css from './DesktopWindowControls.module.css'
 
 export interface DesktopWindowControlsInjected {

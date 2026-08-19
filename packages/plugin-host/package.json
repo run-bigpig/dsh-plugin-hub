@@ -1,6 +1,6 @@
 {
-  "name": "@run-bigpig/dsh-desktop-marketplace-host",
-  "description": "Trusted Harness Remote gateway for DeepSeek Harness Desktop capabilities",
+  "name": "@run-bigpig/dsh-desktop-plugin-host",
+  "description": "Trusted Harness Remote gateway for DSH-DeskTop capabilities",
   "version": "0.1.9",
   "type": "module",
   "main": "lib/index.js",

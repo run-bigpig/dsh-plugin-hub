@@ -48,17 +48,17 @@ const tsc = harnessRequire.resolve('typescript/bin/tsc')
 const tsdown = harnessRequire.resolve('tsdown/run')
 await run(pnpm, ['run', 'build:lib:host'], harness)
 await mkdir(overlay, { recursive: true })
-for (const name of ['marketplace-host', 'marketplace-client', 'marketplace-bundle']) {
+for (const name of ['plugin-host', 'plugin-client', 'plugin-bundle']) {
   await cp(resolve(project, 'packages', name), resolve(overlay, name), { recursive: true })
 }
 await run(pnpm, [
   'install', '--frozen-lockfile=false', '--ignore-scripts',
-  '--filter', '@run-bigpig/dsh-desktop-marketplace-host',
-  '--filter', '@run-bigpig/dsh-desktop-marketplace-client',
-  '--filter', '@run-bigpig/dsh-desktop-marketplace',
+  '--filter', '@run-bigpig/dsh-desktop-plugin-host',
+  '--filter', '@run-bigpig/dsh-desktop-plugin-client',
+  '--filter', '@run-bigpig/dsh-desktop-plugin',
   '--store-dir', store, '--offline',
 ], harness)
-await run(process.execPath, [tsc, '-b', 'packages/desktop/marketplace-host'], harness)
+await run(process.execPath, [tsc, '-b', 'packages/desktop/plugin-host'], harness)
 const generatorURL = pathToFileURL(resolve(harness, 'packages/typert/generator/lib/types/workspace.js')).href
 const { WorkspaceTypertGenerator } = await import(generatorURL)
 const hostAggregatePath = resolve(harness, 'tsconfig.host.json')
@@ -67,19 +67,19 @@ const hostMarker = '    { "path": "./apps/cli" }'
 if (!hostAggregate.includes(hostMarker)) throw new Error('unexpected Harness host aggregate shape')
 await writeFile(hostAggregatePath, hostAggregate.replace(
   hostMarker,
-  '    { "path": "./packages/desktop/marketplace-host" },\n' + hostMarker,
+  '    { "path": "./packages/desktop/plugin-host" },\n' + hostMarker,
 ))
 let artifacts
 try {
   artifacts = new WorkspaceTypertGenerator(harness).generate(
-    ['@run-bigpig/dsh-desktop-marketplace-host'],
+    ['@run-bigpig/dsh-desktop-plugin-host'],
     ['host'],
   )
 } finally {
   await writeFile(hostAggregatePath, hostAggregate)
 }
-if (artifacts.length !== 1) throw new Error(`expected one Marketplace Host Typert artifact, got ${artifacts.length}`)
-const hostDir = resolve(overlay, 'marketplace-host')
+if (artifacts.length !== 1) throw new Error(`expected one Desktop Plugin Host Typert artifact, got ${artifacts.length}`)
+const hostDir = resolve(overlay, 'plugin-host')
 for (const artifact of artifacts) {
   await writeFile(resolve(hostDir, `lib/typert.${artifact.face}.js`), artifact.js)
   await writeFile(resolve(hostDir, `lib/typert.${artifact.face}.d.ts`), artifact.dts)
@@ -89,22 +89,22 @@ for (const artifact of artifacts) {
     await writeFile(resolve(hostDir, 'lib/typert.remote-client.d.ts.map'), artifact.remote.dtsMap)
   }
 }
-await run(process.execPath, [tsdown, '--config', 'packages/desktop/marketplace-host/tsdown.config.ts'], harness)
-await run(process.execPath, [tsc, '-b', 'packages/desktop/marketplace-client'], harness)
+await run(process.execPath, [tsdown, '--config', 'packages/desktop/plugin-host/tsdown.config.ts'], harness)
+await run(process.execPath, [tsc, '-b', 'packages/desktop/plugin-client'], harness)
 await run(process.execPath, [
-  tsdown, '--config', 'packages/desktop/marketplace-client/tsdown.config.ts', '--env.DSH_BUILD_FACE', 'client',
+  tsdown, '--config', 'packages/desktop/plugin-client/tsdown.config.ts', '--env.DSH_BUILD_FACE', 'client',
 ], harness)
 
 for (const name of [
-  '@run-bigpig/dsh-desktop-marketplace-host',
-  '@run-bigpig/dsh-desktop-marketplace-client',
-  '@run-bigpig/dsh-desktop-marketplace',
+  '@run-bigpig/dsh-desktop-plugin-host',
+  '@run-bigpig/dsh-desktop-plugin-client',
+  '@run-bigpig/dsh-desktop-plugin',
 ]) {
   const packageDir = name.endsWith('-host')
-    ? resolve(overlay, 'marketplace-host')
+    ? resolve(overlay, 'plugin-host')
     : name.endsWith('-client')
-      ? resolve(overlay, 'marketplace-client')
-      : resolve(overlay, 'marketplace-bundle')
+      ? resolve(overlay, 'plugin-client')
+      : resolve(overlay, 'plugin-bundle')
   await run(pnpm, ['pack', '--pack-destination', output], packageDir)
 }
 process.stdout.write(`Desktop integration artifacts written to ${basename(output)}\n`)

@@ -1,7 +1,7 @@
 import { defineConfig } from 'tsdown'
 
 export default defineConfig({
-  name: '@run-bigpig/dsh-desktop-marketplace-host',
+  name: '@run-bigpig/dsh-desktop-plugin-host',
   entry: ['lib/types/index.js'],
   outDir: 'lib',
   format: ['esm'],
