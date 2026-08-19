@@ -73,7 +73,11 @@ export function MarketplaceSettingsTab({
         error => {
           console.error('[desktop-marketplace] reading the plugin operation failed:', error)
           if (!current) return
-          setActive({ ...active, phase: 'failed', error: t('operationFailed') })
+          // Installing or removing a persistent profile plugin restarts Harness.
+          // The Remote connection disappears during that handoff even though the
+          // desktop-side operation is still running, so retry instead of turning
+          // the expected disconnect into a false terminal failure.
+          setActive(previous => previous?.id === active.id ? { ...previous } : previous)
         },
       )
     }, 650)
