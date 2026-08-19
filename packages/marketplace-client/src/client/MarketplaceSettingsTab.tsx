@@ -52,7 +52,10 @@ export function MarketplaceSettingsTab({
     let current = true
     void catalog().then(
       snapshot => { if (current) setView({ status: 'ready', snapshot }) },
-      () => { if (current) setView({ status: 'error' }) },
+      error => {
+        console.error('[desktop-marketplace] reading the plugin catalog failed:', error)
+        if (current) setView({ status: 'error' })
+      },
     )
     return () => { current = false }
   }, [catalog, request])
@@ -67,7 +70,8 @@ export function MarketplaceSettingsTab({
           setActive(next)
           if (TERMINAL_PHASES.has(next.phase)) setRequest(value => value + 1)
         },
-        () => {
+        error => {
+          console.error('[desktop-marketplace] reading the plugin operation failed:', error)
           if (!current) return
           setActive({ ...active, phase: 'failed', error: t('operationFailed') })
         },
@@ -90,7 +94,8 @@ export function MarketplaceSettingsTab({
   }
 
   const begin = (plugin: MarketplacePlugin, action: MarketplaceMutationRequest['action']): void => {
-    void mutate({ pluginId: plugin.id, action }).then(setActive, () => {
+    void mutate({ pluginId: plugin.id, action }).then(setActive, error => {
+      console.error('[desktop-marketplace] starting the plugin operation failed:', error)
       setActive({
         id: 'failed',
         pluginId: plugin.id,
