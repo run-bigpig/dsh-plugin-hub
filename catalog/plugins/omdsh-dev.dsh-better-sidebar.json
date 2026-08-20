@@ -2,12 +2,16 @@
   "schemaVersion": 1,
   "id": "omdsh-dev.dsh-better-sidebar",
   "name": "Better Sidebar",
-  "description": "DSH 右侧栏与底部面板工作台，提供文件浏览与编辑、终端、Git、浏览器、后台任务，以及供其他插件注册侧栏页面和文件预览器的服务。市场包镜像自 npm 0.14.0，对应上游 commit 6c891514，属于社区镜像，并非上游签名发布。",
+  "description": "DSH 右侧栏与底部面板工作台，提供文件浏览与编辑、终端、Git、浏览器、后台任务，以及供其他插件注册侧栏页面和文件预览器的服务。安装包自动镜像自 npm，属于社区镜像，并非上游签名发布。",
   "publisher": "omdsh-dev",
   "packageName": "dsh-better-sidebar",
   "repository": {
     "id": 1326893710,
     "url": "https://github.com/omdsh-dev/DSH-better-sidebar"
+  },
+  "updates": {
+    "source": "npm",
+    "distTag": "latest"
   },
   "release": {
     "version": "0.14.0",

@@ -4,7 +4,7 @@
   "title": "DeepSeek Harness Marketplace plugin",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "id", "name", "description", "publisher", "packageName", "repository", "release", "compatibility", "permissions", "license", "verified"],
+  "required": ["schemaVersion", "id", "name", "description", "publisher", "packageName", "repository", "updates", "release", "compatibility", "permissions", "license", "verified"],
   "properties": {
     "schemaVersion": { "const": 1 },
     "id": { "type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)+$", "maxLength": 128 },
@@ -19,6 +19,15 @@
       "properties": {
         "id": { "type": "integer", "minimum": 1 },
         "url": { "type": "string", "pattern": "^https://github\\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/?$" }
+      }
+    },
+    "updates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "distTag"],
+      "properties": {
+        "source": { "const": "npm" },
+        "distTag": { "type": "string", "pattern": "^[A-Za-z0-9._-]+$", "maxLength": 64 }
       }
     },
     "release": {

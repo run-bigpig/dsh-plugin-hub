@@ -4,13 +4,17 @@ import { resolve } from 'node:path'
 
 const root = resolve(import.meta.dirname, '..')
 const keyPath = process.env.DSH_MARKETPLACE_SIGNING_KEY
-if (keyPath === undefined || keyPath.trim() === '') {
-  throw new Error('set DSH_MARKETPLACE_SIGNING_KEY to the Ed25519 private PEM path')
+const inlineKey = process.env.DSH_MARKETPLACE_SIGNING_KEY_PEM
+if ((keyPath === undefined || keyPath.trim() === '') && (inlineKey === undefined || inlineKey.trim() === '')) {
+  throw new Error('set DSH_MARKETPLACE_SIGNING_KEY or DSH_MARKETPLACE_SIGNING_KEY_PEM')
 }
 
 const catalogPath = resolve(root, 'catalog/catalog.json')
 const catalog = await readFile(catalogPath)
-const privateKey = createPrivateKey(await readFile(resolve(keyPath)))
+const privateKeyPEM = inlineKey !== undefined && inlineKey.trim() !== ''
+  ? inlineKey
+  : await readFile(resolve(keyPath))
+const privateKey = createPrivateKey(privateKeyPEM)
 if (privateKey.asymmetricKeyType !== 'ed25519') {
   throw new Error('catalog signing key must be Ed25519')
 }

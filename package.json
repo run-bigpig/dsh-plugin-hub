@@ -8,7 +8,7 @@
     "validate": "node scripts/validate-catalog.mjs",
     "catalog": "node scripts/build-catalog.mjs",
     "catalog:sign": "node scripts/sign-catalog.mjs",
-    "build:harness": "node scripts/build-against-harness.mjs"
+    "sync:plugins": "node scripts/sync-plugins.mjs"
   },
   "devDependencies": {
     "ajv": "8.17.1"

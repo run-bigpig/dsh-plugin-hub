@@ -1,6 +1,0 @@
-- target: '@root'
-  insert:
-    - id: desktop-integration-host
-      name: '@run-bigpig/dsh-desktop-plugin-host'
-    - id: desktop-integration-client
-      name: '@run-bigpig/dsh-desktop-plugin-client'

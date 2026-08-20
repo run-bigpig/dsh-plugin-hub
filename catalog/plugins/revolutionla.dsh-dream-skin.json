@@ -2,17 +2,21 @@
   "schemaVersion": 1,
   "id": "revolutionla.dsh-dream-skin",
   "name": "Dream Skin",
-  "description": "DeepSeek Harness 换肤插件，提供 8 套主题、壁纸、强调色和主题包导入导出。市场包固定到上游 commit cb44e620，属于社区镜像，并非上游签名发布。",
+  "description": "DeepSeek Harness 换肤插件，提供 8 套主题、壁纸、强调色和主题包导入导出。安装包自动镜像自 npm，属于社区镜像，并非上游签名发布。",
   "publisher": "RevolutionLA",
   "packageName": "dsh-dream-skin",
   "repository": {
     "id": 1334737435,
     "url": "https://github.com/RevolutionLA/dsh-dream-skin"
   },
+  "updates": {
+    "source": "npm",
+    "distTag": "latest"
+  },
   "release": {
-    "version": "0.3.0",
-    "assetUrl": "https://github.com/run-bigpig/dsh-plugin-hub/releases/download/dsh-dream-skin-v0.3.0-cb44e620/dsh-dream-skin-0.3.0.tgz",
-    "sha256": "fffd95ca11f68618025cdbe67478e37e593aba12e058e43981398f4077180520"
+    "version": "0.4.1",
+    "assetUrl": "https://github.com/run-bigpig/dsh-plugin-hub/releases/download/mirror-revolutionla-dsh-dream-skin-v0.4.1/dsh-dream-skin-0.4.1.tgz",
+    "sha256": "965c63b9d5ac72d96ae0eb7f3c0d4262b3101f939ba475034b4f50887fdf7a89"
   },
   "compatibility": {
     "harnessCommits": [
