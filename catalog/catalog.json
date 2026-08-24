@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-22T18:50:20.362Z",
+  "generatedAt": "2026-08-24T19:01:42.598Z",
   "plugins": [
     {
       "schemaVersion": 1,
@@ -18,9 +18,9 @@
         "distTag": "latest"
       },
       "release": {
-        "version": "0.15.2",
-        "assetUrl": "https://github.com/run-bigpig/dsh-plugin-hub/releases/download/mirror-omdsh-dev-dsh-better-sidebar-v0.15.2/dsh-better-sidebar-0.15.2.tgz",
-        "sha256": "d932367e9b436e3f515394f55e90c5793253a51d357b9d390ab16cb9e91931a9"
+        "version": "0.16.0",
+        "assetUrl": "https://github.com/run-bigpig/dsh-plugin-hub/releases/download/mirror-omdsh-dev-dsh-better-sidebar-v0.16.0/dsh-better-sidebar-0.16.0.tgz",
+        "sha256": "b2808265ee88a6c4159dac773ae50ac34929d96048d98b189852193217f3d322"
       },
       "compatibility": {
         "harnessCommits": [
@@ -52,9 +52,9 @@
         "distTag": "latest"
       },
       "release": {
-        "version": "0.4.10",
-        "assetUrl": "https://github.com/run-bigpig/dsh-plugin-hub/releases/download/mirror-revolutionla-dsh-dream-skin-v0.4.10/dsh-dream-skin-0.4.10.tgz",
-        "sha256": "9738a7c9988d9be4f259e1f064881d4df5a9e7918c4b6e4a20ea7b3e055796d3"
+        "version": "0.4.11",
+        "assetUrl": "https://github.com/run-bigpig/dsh-plugin-hub/releases/download/mirror-revolutionla-dsh-dream-skin-v0.4.11/dsh-dream-skin-0.4.11.tgz",
+        "sha256": "4c94546042712fce761de73d5b663d55f4d947866213a0696db1ae3099b33780"
       },
       "compatibility": {
         "harnessCommits": [

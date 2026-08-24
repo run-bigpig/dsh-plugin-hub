@@ -14,9 +14,9 @@
     "distTag": "latest"
   },
   "release": {
-    "version": "0.15.2",
-    "assetUrl": "https://github.com/run-bigpig/dsh-plugin-hub/releases/download/mirror-omdsh-dev-dsh-better-sidebar-v0.15.2/dsh-better-sidebar-0.15.2.tgz",
-    "sha256": "d932367e9b436e3f515394f55e90c5793253a51d357b9d390ab16cb9e91931a9"
+    "version": "0.16.0",
+    "assetUrl": "https://github.com/run-bigpig/dsh-plugin-hub/releases/download/mirror-omdsh-dev-dsh-better-sidebar-v0.16.0/dsh-better-sidebar-0.16.0.tgz",
+    "sha256": "b2808265ee88a6c4159dac773ae50ac34929d96048d98b189852193217f3d322"
   },
   "compatibility": {
     "harnessCommits": [

@@ -14,9 +14,9 @@
     "distTag": "latest"
   },
   "release": {
-    "version": "0.4.10",
-    "assetUrl": "https://github.com/run-bigpig/dsh-plugin-hub/releases/download/mirror-revolutionla-dsh-dream-skin-v0.4.10/dsh-dream-skin-0.4.10.tgz",
-    "sha256": "9738a7c9988d9be4f259e1f064881d4df5a9e7918c4b6e4a20ea7b3e055796d3"
+    "version": "0.4.11",
+    "assetUrl": "https://github.com/run-bigpig/dsh-plugin-hub/releases/download/mirror-revolutionla-dsh-dream-skin-v0.4.11/dsh-dream-skin-0.4.11.tgz",
+    "sha256": "4c94546042712fce761de73d5b663d55f4d947866213a0696db1ae3099b33780"
   },
   "compatibility": {
     "harnessCommits": [
