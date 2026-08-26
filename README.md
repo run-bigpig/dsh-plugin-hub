@@ -31,10 +31,7 @@ GitHub Actions 完整性校验
 
 ## 当前收录
 
-| 插件 | 上游项目 | npm 包 |
-| --- | --- | --- |
-| Better Sidebar | [omdsh-dev/DSH-better-sidebar](https://github.com/omdsh-dev/DSH-better-sidebar) | [`dsh-better-sidebar`](https://www.npmjs.com/package/dsh-better-sidebar) |
-| Dream Skin | [RevolutionLA/dsh-dream-skin](https://github.com/RevolutionLA/dsh-dream-skin) | [`dsh-dream-skin`](https://www.npmjs.com/package/dsh-dream-skin) |
+当前暂无收录插件。
 
 实际版本以 [catalog/catalog.json](catalog/catalog.json) 为准。
 
